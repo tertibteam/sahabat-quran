@@ -5684,6 +5684,15 @@ function confetti(){
   draw();
 }
 window.openGameZone=function(){
+  // Stop any playing Quran audio before entering Game Zone
+  try{
+    if(typeof audio !== 'undefined' && !audio.paused){ audio.pause(); }
+    const ka = document.getElementById('audioKeepAlive');
+    if(ka && !ka.paused){ ka.pause(); }
+    if(typeof S !== 'undefined'){ S.isPlaying = false; }
+    if(typeof updatePlayBtn === 'function') updatePlayBtn();
+    if(typeof updateMini === 'function') updateMini();
+  }catch(e){ console.warn('openGameZone audio stop error:',e); }
   try{ gzLoad(); }catch(e){}
   try{ initOrbs(); }catch(e){}
   try{ gzUpdateLobby(); }catch(e){ console.warn('gzUpdateLobby error:',e); }
