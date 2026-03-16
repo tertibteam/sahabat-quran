@@ -1,14 +1,15 @@
 {
   "name": "Sahabat Quran",
   "short_name": "SahabatQuran",
+  "id": "/sahabat-quran/",
   "description": "Quran listening & learning app by Tertib",
   "start_url": "/sahabat-quran/",
+  "scope": "/sahabat-quran/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#2bb673",
   "lang": "ms",
-  "scope": "/sahabat-quran/",
   "icons": [
     {
       "src": "icons/icon-192.png",
