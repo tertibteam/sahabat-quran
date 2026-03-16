@@ -8333,5 +8333,10 @@ function _sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 // Tour is now triggered from saveProfile() after new user completes profile setup
 // ===== END ONBOARDING GUIDED TOUR v3 =====
 </script>
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sahabat-quran/service-worker.js');
+}
+</script>
 </body>
 </html>
