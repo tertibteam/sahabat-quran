@@ -979,7 +979,26 @@ function sqDismissWelcome() {
     </div>
     <div class="pob-label">Your name</div>
     <input class="pob-input" id="pobNameInput" type="text" placeholder="e.g. Ahmad, Siti..." maxlength="20"/>
-    <button class="pob-start" onclick="saveProfile()">Begin My Journey ›</button>
+    <button class="pob-start" onclick="saveProfile()">Begin My Journey</button>
+
+    <!-- Login section on welcome screen -->
+    <div style="margin-top:18px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+        <div style="flex:1;height:1px;background:rgba(255,255,255,0.2);"></div>
+        <span style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:600;letter-spacing:0.5px;">SUDAH ADA AKAUN?</span>
+        <div style="flex:1;height:1px;background:rgba(255,255,255,0.2);"></div>
+      </div>
+      <!-- Google OAuth -->
+      <button onclick="sqGoogleOAuth()" style="width:100%;padding:13px 16px;border-radius:14px;border:none;background:rgba(255,255,255,0.92);display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;color:#333;margin-bottom:10px;transition:opacity .15s;">
+        <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.706A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.038l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.962L3.964 7.294C4.672 5.167 6.656 3.58 9 3.58z"/></svg>
+        Teruskan dengan Google
+      </button>
+      <!-- Email OTP -->
+      <button onclick="sqOpenEmailLogin()" style="width:100%;padding:13px 16px;border-radius:14px;border:1.5px solid rgba(255,255,255,0.3);background:transparent;display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;color:#fff;transition:opacity .15s;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Teruskan dengan Email
+      </button>
+    </div>
   </div>
 </div>
 <div class="profile-sheet" id="profileSheet" onclick="closeProfileSheet(event)">
@@ -1006,7 +1025,7 @@ function sqDismissWelcome() {
       <div id="googleSignedOut" style="display:block;">
         <button onclick="sqGoogleSignIn()" id="googleSignInBtn" style="width:100%;padding:13px 16px;border-radius:16px;border:1.5px solid #e0e0e0;background:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;color:#333;box-shadow:0 2px 8px rgba(0,0,0,0.08);transition:all 0.2s;">
           <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.706A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.038l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.962L3.964 7.294C4.672 5.167 6.656 3.58 9 3.58z"/></svg>
-          Sync dengan Google
+          Sync dengan Email (OTP)
         </button>
         <div style="font-size:11px;color:#aaa;text-align:center;margin-top:6px;">Simpan progress, bookmark &amp; Game Zone XP &#x2601;&#xFE0F;</div>
       </div>
@@ -1117,6 +1136,9 @@ function sqDismissWelcome() {
         <div class="verse-badge" id="vBadge">Verse 1 of 7</div>
         <div style="display:flex;align-items:center;gap:6px;">
           <button class="bm-btn" title="Story" onclick="openStoryMode()" style="font-size:16px;">📖</button>
+          <button class="bm-btn" title="Reading Mode" onclick="sqReadingOpen()" style="display:flex;align-items:center;justify-content:center;padding:0;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </button>
           <button class="bm-btn" title="Share" onclick="openShareAyah()" style="font-size:16px;">📤</button>
           <button class="bm-btn" id="bmBtn" onclick="toggleBM()">🏷️</button>
         </div>
@@ -7838,98 +7860,212 @@ window.gzShareDownload = function(){
   window._injectTertibLogo = injectTertibLogo;
 })();
 </script>
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged }
-  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
-import { getFirestore, doc, setDoc, getDoc, serverTimestamp }
-  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
-const SQ_FIREBASE_CONFIG = {
-  apiKey:            "REPLACE_WITH_YOUR_API_KEY",
-  authDomain:        "REPLACE_WITH_YOUR_AUTH_DOMAIN",
-  projectId:         "REPLACE_WITH_YOUR_PROJECT_ID",
-  storageBucket:     "REPLACE_WITH_YOUR_STORAGE_BUCKET",
-  messagingSenderId: "REPLACE_WITH_YOUR_SENDER_ID",
-  appId:             "REPLACE_WITH_YOUR_APP_ID"
-};
-const _fbConfigured = SQ_FIREBASE_CONFIG.apiKey !== "REPLACE_WITH_YOUR_API_KEY";
-let _fbApp, _fbAuth, _fbDb, _fbUser = null;
-function _fbInit(){
-  if(!_fbConfigured) return false;
-  if(_fbApp) return true;
+<!-- ===== SUPABASE AUTH + CLOUD SYNC ===== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ===== SUPABASE CONFIG =====
+const SQ_SUPABASE_URL  = 'https://lgxkdbnqymhnphpykcai.supabase.co';
+const SQ_SUPABASE_ANON = 'sb_publishable_QTUnO3Ugv5jelWhqMsYS7g_vK40GWfj';
+let _sbClient = null;
+let _sbUser   = null;
+let _sbOtpSent = false;
+
+function _sbInit(){
+  if(_sbClient) return _sbClient;
   try {
-    _fbApp  = initializeApp(SQ_FIREBASE_CONFIG);
-    _fbAuth = getAuth(_fbApp);
-    _fbDb   = getFirestore(_fbApp);
-    getRedirectResult(_fbAuth).then(result => {
-      if(result?.user){
-        if(typeof showToast==='function') showToast('✅ Log masuk berjaya!');
-        _autoSyncIfNeeded();
-      }
-    }).catch(()=>{});
-    onAuthStateChanged(_fbAuth, user => {
-      _fbUser = user;
-      _updateSyncUI(user);
-      if(user) _autoSyncIfNeeded();
+    _sbClient = supabase.createClient(SQ_SUPABASE_URL, SQ_SUPABASE_ANON);
+    // Listen for auth state changes
+    _sbClient.auth.onAuthStateChange((event, session) => {
+      _sbUser = session?.user || null;
+      _sbUpdateSyncUI(_sbUser);
+      if(_sbUser) _sbAutoSyncIfNeeded();
     });
-    return true;
-  } catch(e){ console.warn('Firebase init failed:', e); return false; }
+    // Check existing session
+    _sbClient.auth.getSession().then(({ data: { session } }) => {
+      _sbUser = session?.user || null;
+      _sbUpdateSyncUI(_sbUser);
+      if(_sbUser) _sbAutoSyncIfNeeded();
+    });
+    return _sbClient;
+  } catch(e){ console.warn('Supabase init error:', e); return null; }
 }
-function _updateSyncUI(user){
+
+function _sbUpdateSyncUI(user){
   const out = document.getElementById('googleSignedOut');
   const inn = document.getElementById('googleSignedIn');
   if(!out || !inn) return;
   if(user){
     out.style.display = 'none';
     inn.style.display = 'block';
-    const nm  = document.getElementById('googleUserName');
-    const em  = document.getElementById('googleUserEmail');
-    const ph  = document.getElementById('googleUserPhoto');
-    if(nm) nm.textContent = user.displayName || 'User';
+    const nm = document.getElementById('googleUserName');
+    const em = document.getElementById('googleUserEmail');
+    const ph = document.getElementById('googleUserPhoto');
+    if(nm) nm.textContent = user.user_metadata?.name || user.email?.split('@')[0] || 'User';
     if(em) em.textContent = user.email || '';
-    if(ph && user.photoURL){ ph.src = user.photoURL; ph.style.display = 'block'; }
+    if(ph){ ph.style.display = 'none'; }
   } else {
     out.style.display = 'block';
     inn.style.display = 'none';
   }
 }
-function _setSyncStatus(msg, color){
+
+function _sbSetSyncStatus(msg, color){
   const el = document.getElementById('googleSyncStatus');
   if(el){ el.textContent = msg; el.style.color = color || '#2bb673'; }
 }
-function _gatherLocalData(){
+
+// ---- OTP Auth flow (email) ----
+window.sqOTPRequestCode = async function(){
+  const emailEl = document.getElementById('sqOtpEmailInput');
+  const email = emailEl ? emailEl.value.trim() : '';
+  if(!email || !email.includes('@')){
+    if(typeof showToast === 'function') showToast('⚠ Masukkan email yang sah','#f59e0b');
+    return;
+  }
+  const sb = _sbInit();
+  if(!sb) return;
+  const btn = document.getElementById('sqOtpRequestBtn');
+  if(btn){ btn.textContent = '⏳ Menghantar...'; btn.disabled = true; }
+  try {
+    const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
+    if(error) throw error;
+    _sbOtpSent = true;
+    const ps = document.getElementById('sqAuthProviderScreen');
+    if(ps) ps.style.display = 'none';
+    document.getElementById('sqOtpStep1').style.display = 'none';
+    document.getElementById('sqOtpStep2').style.display = 'block';
+    if(typeof showToast === 'function') showToast('📧 Kod OTP dihantar ke email!','#2bb673');
+  } catch(e){
+    if(typeof showToast === 'function') showToast('❌ Gagal hantar OTP: ' + (e.message||''),'#ef4444');
+  } finally {
+    if(btn){ btn.textContent = 'Hantar Kod OTP'; btn.disabled = false; }
+  }
+};
+
+window.sqOTPVerify = async function(){
+  const emailEl = document.getElementById('sqOtpEmailInput');
+  const codeEl  = document.getElementById('sqOtpCodeInput');
+  const email = emailEl ? emailEl.value.trim() : '';
+  const token = codeEl  ? codeEl.value.trim() : '';
+  if(!token || token.length < 4){
+    if(typeof showToast === 'function') showToast('⚠ Masukkan kod OTP','#f59e0b');
+    return;
+  }
+  const sb = _sbInit();
+  if(!sb) return;
+  const btn = document.getElementById('sqOtpVerifyBtn');
+  if(btn){ btn.textContent = '⏳ Mengesahkan...'; btn.disabled = true; }
+  try {
+    const { data, error } = await sb.auth.verifyOtp({ email, token, type: 'email' });
+    if(error) throw error;
+    _sbUser = data.user;
+    _sbUpdateSyncUI(_sbUser);
+    document.getElementById('sqOtpOverlay').style.display = 'none';
+    if(typeof showToast === 'function') showToast('✅ Log masuk berjaya!','#2bb673');
+    // Upsert profile into Supabase
+    await _sbUpsertProfile();
+    await _sbAutoSyncIfNeeded();
+  } catch(e){
+    if(typeof showToast === 'function') showToast('❌ Kod tidak sah: ' + (e.message||''),'#ef4444');
+  } finally {
+    if(btn){ btn.textContent = 'Sahkan Kod'; btn.disabled = false; }
+  }
+};
+
+window.sqOTPResend = async function(){
+  _sbOtpSent = false;
+  document.getElementById('sqOtpStep1').style.display = 'block';
+  document.getElementById('sqOtpStep2').style.display = 'none';
+  const ps = document.getElementById('sqAuthProviderScreen');
+  if(ps) ps.style.display = 'none';
+};
+
+window.sqOTPClose = function(){
+  document.getElementById('sqOtpOverlay').style.display = 'none';
+};
+
+window.sqGoogleSignIn = function(){
+  // Open the auth overlay at provider selection screen
+  const ov = document.getElementById('sqOtpOverlay');
+  ov.style.display = 'flex';
+  const ps = document.getElementById('sqAuthProviderScreen');
+  const s1 = document.getElementById('sqOtpStep1');
+  const s2 = document.getElementById('sqOtpStep2');
+  if(ps) ps.style.display = 'block';
+  if(s1) s1.style.display = 'none';
+  if(s2) s2.style.display = 'none';
+};
+
+window.sqOpenEmailLogin = function(){
+  const ps = document.getElementById('sqAuthProviderScreen');
+  const s1 = document.getElementById('sqOtpStep1');
+  const ov = document.getElementById('sqOtpOverlay');
+  if(ps) ps.style.display = 'none';
+  if(s1){ s1.style.display = 'block'; }
+  if(ov) ov.style.display = 'flex';
+  document.getElementById('sqOtpStep2').style.display = 'none';
+};
+
+window.sqGoogleOAuth = async function(){
+  const sb = _sbInit();
+  if(!sb){ if(typeof showToast==='function') showToast('⚠ Supabase tidak tersedia','#f59e0b'); return; }
+  try {
+    const { error } = await sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: 'https://tertibteam.github.io/sahabat-quran/' }
+    });
+    if(error) throw error;
+  } catch(e){
+    if(typeof showToast==='function') showToast('❌ Google login gagal: '+(e.message||''),'#ef4444');
+  }
+};
+
+window.sqGoogleSignOut = async function(){
+  const sb = _sbInit();
+  if(!sb) return;
+  try {
+    await sb.auth.signOut();
+    _sbUser = null;
+    _sbUpdateSyncUI(null);
+    if(typeof showToast === 'function') showToast('👋 Telah log keluar','#666');
+  } catch(e){}
+};
+
+window.sqSyncNow = async function(){
+  if(!_sbUser){ window.sqGoogleSignIn(); return; }
+  await _sbSyncToCloud();
+  if(typeof showToast === 'function') showToast('☁️ Data berjaya disync!','#2bb673');
+};
+
+// ---- Data gathering ----
+function _sbGatherLocalData(){
   const data = {};
-  try { data.profile = JSON.parse(localStorage.getItem('sq_profile') || 'null'); } catch(e){}
-  try { data.bookmarks = JSON.parse(localStorage.getItem('sq_bookmarks') || 'null'); } catch(e){}
-  try { data.gz_v2 = JSON.parse(localStorage.getItem('sq_gz_v2') || 'null'); } catch(e){}
-  try { data.theme = localStorage.getItem('sq_theme'); } catch(e){}
+  try { data.profile    = JSON.parse(localStorage.getItem('sq_profile') || 'null'); } catch(e){}
+  try { data.bookmarks  = JSON.parse(localStorage.getItem('sq_bookmarks') || 'null'); } catch(e){}
+  try { data.gz_v2      = JSON.parse(localStorage.getItem('sq_gz_v2') || 'null'); } catch(e){}
+  try { data.theme      = localStorage.getItem('sq_theme'); } catch(e){}
   const positions = {};
   for(let i = 1; i <= 114; i++){
-    try {
-      const pos = localStorage.getItem(`sq_pos_${i}`);
-      if(pos !== null) positions[i] = pos;
-    } catch(e){}
+    try { const pos = localStorage.getItem(`sq_pos_${i}`); if(pos !== null) positions[i] = pos; } catch(e){}
   }
   if(Object.keys(positions).length) data.positions = positions;
   const completions = {};
   for(let i = 1; i <= 114; i++){
-    try {
-      const c = localStorage.getItem(`sq_done_${i}`);
-      if(c !== null) completions[i] = c;
-    } catch(e){}
+    try { const c = localStorage.getItem(`sq_completions_${i}`); if(c !== null) completions[i] = c; } catch(e){}
   }
   if(Object.keys(completions).length) data.completions = completions;
   return data;
 }
-function _restoreFromCloud(data){
+
+function _sbRestoreFromCloud(data){
   if(!data) return;
   let changed = false;
   if(data.profile){ try{ localStorage.setItem('sq_profile', JSON.stringify(data.profile)); changed=true; }catch(e){} }
-  if(data.bookmarks){ try{ localStorage.setItem('sq_bookmarks', JSON.stringify(data.bookmarks)); changed=true; }catch(e){} }
+  if(data.bookmarks){ try{ localStorage.setItem('sq_bookmarks', JSON.stringify(data.bookmarks)); S.bookmarks = data.bookmarks; changed=true; }catch(e){} }
   if(data.gz_v2){ try{ localStorage.setItem('sq_gz_v2', JSON.stringify(data.gz_v2)); changed=true; }catch(e){} }
   if(data.theme){ try{ localStorage.setItem('sq_theme', data.theme); }catch(e){} }
   if(data.positions){ Object.entries(data.positions).forEach(([k,v])=>{ try{localStorage.setItem(`sq_pos_${k}`,v);}catch(e){} }); changed=true; }
-  if(data.completions){ Object.entries(data.completions).forEach(([k,v])=>{ try{localStorage.setItem(`sq_done_${k}`,v);}catch(e){} }); changed=true; }
+  if(data.completions){ Object.entries(data.completions).forEach(([k,v])=>{ try{localStorage.setItem(`sq_completions_${k}`,v);}catch(e){} }); changed=true; }
   if(changed){
     if(typeof loadProfile === 'function') loadProfile();
     if(typeof renderBookmarks === 'function') renderBookmarks();
@@ -7939,124 +8075,89 @@ function _restoreFromCloud(data){
     if(typeof applyTheme === 'function' && data.theme) applyTheme(data.theme);
   }
 }
-async function _syncToCloud(){
-  if(!_fbUser || !_fbDb) return;
-  _setSyncStatus('⏳ Syncing...', '#f59e0b');
+
+// Upsert Supabase profile row
+async function _sbUpsertProfile(){
+  if(!_sbUser || !_sbClient) return;
   try {
-    const uid = _fbUser.uid;
-    const localData = _gatherLocalData();
-    const ref = doc(_fbDb, 'users', uid);
-    const snap = await getDoc(ref);
-    let merged = { ...localData, updatedAt: serverTimestamp() };
-    if(snap.exists()){
-      const cloud = snap.data();
-      if(cloud.gz_v2 && localData.gz_v2){
-        const cloudXP = cloud.gz_v2.xp || 0;
-        const localXP = localData.gz_v2.xp || 0;
-        if(cloudXP > localXP){
-          merged.gz_v2 = cloud.gz_v2;
-          try{ localStorage.setItem('sq_gz_v2', JSON.stringify(cloud.gz_v2)); }catch(e){}
-        }
-      }
-      if(cloud.positions && localData.positions){
-        const mergedPos = { ...cloud.positions };
-        Object.entries(localData.positions).forEach(([k,v])=>{
-          if(!mergedPos[k] || parseInt(v) > parseInt(mergedPos[k])) mergedPos[k] = v;
-        });
-        merged.positions = mergedPos;
-        Object.entries(mergedPos).forEach(([k,v])=>{ try{localStorage.setItem(`sq_pos_${k}`,v);}catch(e){} });
-      }
-      if(cloud.bookmarks && localData.bookmarks){
-        try {
-          const cloudBm = Array.isArray(cloud.bookmarks) ? cloud.bookmarks : JSON.parse(cloud.bookmarks||'[]');
-          const localBm = Array.isArray(localData.bookmarks) ? localData.bookmarks : JSON.parse(localData.bookmarks||'[]');
-          const seen = new Set();
-          const union = [...localBm, ...cloudBm].filter(b=>{
-            const key = `${b.surahId}_${b.ayahNum}`;
-            if(seen.has(key)) return false;
-            seen.add(key); return true;
-          });
-          merged.bookmarks = union;
-          try{ localStorage.setItem('sq_bookmarks', JSON.stringify(union)); }catch(e){}
-        } catch(e){}
-      }
+    const p = JSON.parse(localStorage.getItem('sq_profile') || '{}');
+    await _sbClient.from('profiles').upsert({
+      id: _sbUser.id,
+      name: p.name || 'Reader',
+      avatar: p.avatar || '🌙',
+      joined_ts: p.joinedTs || Date.now(),
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'id' });
+  } catch(e){ console.warn('Profile upsert error:', e); }
+}
+
+async function _sbSyncToCloud(){
+  if(!_sbUser || !_sbClient) return;
+  _sbSetSyncStatus('⏳ Syncing...', '#f59e0b');
+  try {
+    const uid = _sbUser.id;
+    const localData = _sbGatherLocalData();
+    // Read existing cloud data
+    const { data: existing } = await _sbClient.from('user_data').select('*').eq('user_id', uid).single();
+    let mergedPositions  = { ...(existing?.positions || {}), ...(localData.positions || {}) };
+    // Keep highest position per surah
+    if(existing?.positions && localData.positions){
+      Object.entries(localData.positions).forEach(([k,v])=>{
+        if(!mergedPositions[k] || parseInt(v) > parseInt(mergedPositions[k])) mergedPositions[k] = v;
+      });
     }
-    await setDoc(ref, merged, { merge: true });
+    // Merge bookmarks (union)
+    let mergedBookmarks = localData.bookmarks || [];
+    if(existing?.bookmarks && localData.bookmarks){
+      const seen = new Set();
+      mergedBookmarks = [...(localData.bookmarks||[]), ...(existing.bookmarks||[])].filter(b=>{
+        const key = `${b.surahId}_${b.ayahN}`;
+        if(seen.has(key)) return false;
+        seen.add(key); return true;
+      });
+      try{ localStorage.setItem('sq_bookmarks', JSON.stringify(mergedBookmarks)); S.bookmarks = mergedBookmarks; }catch(e){}
+    }
+    const payload = {
+      user_id: uid,
+      profile: localData.profile,
+      bookmarks: mergedBookmarks,
+      gz_v2: localData.gz_v2,
+      theme: localData.theme,
+      positions: mergedPositions,
+      completions: localData.completions,
+      updated_at: new Date().toISOString()
+    };
+    await _sbClient.from('user_data').upsert(payload, { onConflict: 'user_id' });
     const now = new Date().toLocaleTimeString('ms-MY',{hour:'2-digit',minute:'2-digit'});
-    _setSyncStatus(`✓ Synced ${now}`, '#2bb673');
+    _sbSetSyncStatus(`✓ Synced ${now}`, '#2bb673');
     try{ localStorage.setItem('sq_last_sync', Date.now().toString()); }catch(e){}
-    if(typeof loadProfile === 'function') loadProfile();
-    if(typeof renderBookmarks === 'function') renderBookmarks();
-    if(typeof renderProgress === 'function') renderProgress();
+    await _sbUpsertProfile();
     if(typeof updateQuranStats === 'function') updateQuranStats();
   } catch(e){
-    console.error('Sync error:', e);
-    _setSyncStatus('⚠ Sync failed', '#ef4444');
+    console.error('Supabase sync error:', e);
+    _sbSetSyncStatus('⚠ Sync gagal', '#ef4444');
   }
 }
-async function _autoSyncIfNeeded(){
-  if(!_fbUser) return;
+
+async function _sbAutoSyncIfNeeded(){
+  if(!_sbUser) return;
   const last = parseInt(localStorage.getItem('sq_last_sync')||'0');
   if(Date.now() - last < 5*60*1000) return;
-  await _syncToCloud();
+  await _sbSyncToCloud();
 }
-window.sqGoogleSignIn = async function(){
-  if(!_fbConfigured){
-    if(typeof showToast === 'function'){
-      showToast('⚙️ Firebase belum dikonfigurasi. Lihat README untuk setup.','#f59e0b');
-    } else {
-      alert('Firebase belum dikonfigurasi.\nBuka fail HTML dan cari SQ_FIREBASE_CONFIG untuk setup.\n\nSila rujuk README untuk arahan penuh.');
-    }
-    return;
-  }
-  if(!_fbInit()) return;
-  try {
-    const provider = new GoogleAuthProvider();
-    const isTWA = document.referrer.startsWith('android-app://') ||
-                  (navigator.userAgent.includes('wv') &&
-                   window.matchMedia('(display-mode: standalone)').matches);
-    if(isTWA){
-      await signInWithRedirect(_fbAuth, provider);
-      return;
-    }
-    await signInWithPopup(_fbAuth, provider);
-    if(typeof showToast === 'function') showToast('✅ Berjaya log masuk!','#2bb673');
-  } catch(e){
-    if(e.code !== 'auth/popup-closed-by-user'){
-      if(typeof showToast === 'function') showToast('❌ Log masuk gagal','#ef4444');
-    }
-  }
-};
-window.sqGoogleSignOut = async function(){
-  if(!_fbAuth) return;
-  try {
-    await signOut(_fbAuth);
-    if(typeof showToast === 'function') showToast('👋 Telah log keluar','#666');
-  } catch(e){}
-};
-window.sqSyncNow = async function(){
-  if(!_fbUser){
-    window.sqGoogleSignIn();
-    return;
-  }
-  await _syncToCloud();
-  if(typeof showToast === 'function') showToast('☁️ Data berjaya disync!','#2bb673');
-};
-_fbInit();
-const _origGZSave = window.GZ_saveStats;
-if(typeof _origGZSave === 'function'){
-  window.GZ_saveStats = function(){
-    _origGZSave.apply(this, arguments);
-    if(_fbUser) setTimeout(_autoSyncIfNeeded, 3000);
-  };
-}
-const _origSetItem = localStorage.setItem.bind(localStorage);
+
+// Patch localStorage.setItem to trigger auto-sync
+const _sbOrigSetItem = localStorage.setItem.bind(localStorage);
 localStorage.setItem = function(key, value){
-  _origSetItem(key, value);
-  if(_fbUser && (key.startsWith('sq_') || key === 'sq_gz_v2')) {
-    setTimeout(_autoSyncIfNeeded, 2000);
+  _sbOrigSetItem(key, value);
+  if(_sbUser && key.startsWith('sq_')){
+    clearTimeout(window._sbSyncTimer);
+    window._sbSyncTimer = setTimeout(_sbAutoSyncIfNeeded, 3000);
   }
 };
+
+// Init on load
+_sbInit();
 </script>
 
 <script>
@@ -8333,6 +8434,507 @@ function _sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 // Tour is now triggered from saveProfile() after new user completes profile setup
 // ===== END ONBOARDING GUIDED TOUR v3 =====
 </script>
+
+<!-- ===== OTP AUTH OVERLAY ===== -->
+<div id="sqOtpOverlay" style="display:none;position:fixed;inset:0;z-index:19999;background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);align-items:center;justify-content:center;" onclick="if(event.target===this)sqOTPClose()">
+  <div style="background:#fff;border-radius:24px;padding:28px 24px;width:calc(100vw - 40px);max-width:360px;box-shadow:0 20px 60px rgba(0,0,0,0.25);position:relative;animation:shareSlideUp .3s ease;">
+    <button onclick="sqOTPClose()" style="position:absolute;top:14px;right:14px;background:rgba(0,0,0,0.06);border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;color:#555;display:flex;align-items:center;justify-content:center;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div style="text-align:center;margin-bottom:22px;">
+      <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#2bb673,#1a9e5c);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div style="font-size:17px;font-weight:800;color:#1a1a1a;">Log Masuk / Daftar</div>
+      <div style="font-size:12px;color:#888;margin-top:4px;">Sync progress &amp; bookmark anda ke cloud</div>
+    </div>
+
+    <!-- Provider select screen -->
+    <div id="sqAuthProviderScreen">
+      <!-- Google OAuth -->
+      <button onclick="sqGoogleOAuth()" style="width:100%;padding:13px 16px;border-radius:14px;border:1.5px solid #e0e0e0;background:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;color:#333;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:10px;transition:all .15s;">
+        <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.706A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.038l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.962L3.964 7.294C4.672 5.167 6.656 3.58 9 3.58z"/></svg>
+        Teruskan dengan Google
+      </button>
+
+      <div style="display:flex;align-items:center;gap:8px;margin:12px 0;">
+        <div style="flex:1;height:1px;background:#f0f0f0;"></div>
+        <span style="font-size:11px;color:#bbb;font-weight:600;">atau</span>
+        <div style="flex:1;height:1px;background:#f0f0f0;"></div>
+      </div>
+
+      <!-- Email OTP -->
+      <button onclick="sqOpenEmailLogin()" style="width:100%;padding:13px 16px;border-radius:14px;border:1.5px solid #e0e0e0;background:#f8f8f8;display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;color:#555;transition:all .15s;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Teruskan dengan Email
+      </button>
+      <div style="font-size:11px;color:#bbb;text-align:center;margin-top:10px;">Simpan progress, bookmark &amp; Game Zone XP</div>
+    </div>
+
+    <!-- Step 1: Email entry -->
+    <div id="sqOtpStep1" style="display:none;">
+      <button onclick="document.getElementById('sqAuthProviderScreen').style.display='block';document.getElementById('sqOtpStep1').style.display='none';" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:#888;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;padding:0;margin-bottom:16px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 5l-7 7 7 7"/></svg>
+        Kembali
+      </button>
+      <div style="font-size:11px;font-weight:700;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Email</div>
+      <input id="sqOtpEmailInput" type="email" placeholder="nama@email.com" style="width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid #e0e0e0;background:#f8f8f8;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;margin-bottom:14px;" />
+      <button id="sqOtpRequestBtn" onclick="sqOTPRequestCode()" style="width:100%;padding:14px;border-radius:14px;border:none;background:linear-gradient(135deg,#2bb673,#1a9e5c);color:#fff;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(43,182,115,0.35);">Hantar Kod OTP</button>
+      <div style="font-size:11px;color:#aaa;text-align:center;margin-top:10px;">Kod 6-digit akan dihantar ke email anda</div>
+    </div>
+    <!-- Step 2: OTP code entry -->
+    <div id="sqOtpStep2" style="display:none;">
+      <div style="font-size:11px;font-weight:700;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Kod OTP (semak email anda)</div>
+      <input id="sqOtpCodeInput" type="number" placeholder="123456" inputmode="numeric" maxlength="6" style="width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid #e0e0e0;background:#f8f8f8;font-size:22px;font-weight:700;font-family:inherit;outline:none;box-sizing:border-box;text-align:center;letter-spacing:6px;margin-bottom:14px;" />
+      <button id="sqOtpVerifyBtn" onclick="sqOTPVerify()" style="width:100%;padding:14px;border-radius:14px;border:none;background:linear-gradient(135deg,#2bb673,#1a9e5c);color:#fff;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(43,182,115,0.35);margin-bottom:10px;">Sahkan Kod</button>
+      <button onclick="sqOTPResend()" style="width:100%;padding:10px;border-radius:12px;border:1.5px solid #e0e0e0;background:#fff;color:#888;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">Hantar semula</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== READING MODE ===== -->
+<style>
+/* ── overlay shell ── */
+#sqReadingOverlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 9500;
+  background: #fafaf8;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+[data-theme="dark"] #sqReadingOverlay { background: #111; }
+#sqReadingOverlay.rm-open { display: flex; }
+
+/* ── top bar ── */
+.rm-topbar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  background: #fff;
+  flex-shrink: 0;
+  position: sticky; top: 0; z-index: 10;
+}
+[data-theme="dark"] .rm-topbar {
+  background: #1a1a1a;
+  border-color: rgba(255,255,255,0.07);
+}
+.rm-back-btn {
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 10px;
+  color: var(--text, #1a1a1a);
+  transition: background .15s;
+}
+.rm-back-btn:active { background: rgba(0,0,0,0.06); }
+.rm-topbar-info { flex: 1; min-width: 0; }
+.rm-topbar-name {
+  font-size: 15px; font-weight: 700;
+  color: var(--text, #1a1a1a);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.rm-topbar-sub {
+  font-size: 11px; color: var(--textMuted, #999); margin-top: 1px;
+}
+.rm-topbar-arabic {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 20px; color: var(--textSub, #666); flex-shrink: 0;
+}
+/* settings row */
+.rm-settings-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+[data-theme="dark"] .rm-settings-bar {
+  background: #1a1a1a;
+  border-color: rgba(255,255,255,0.05);
+}
+.rm-pill {
+  flex-shrink: 0;
+  padding: 5px 13px; border-radius: 20px;
+  border: 1.5px solid rgba(0,0,0,0.1);
+  background: #f4f4f4; color: #555;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer; font-family: inherit;
+  transition: all .15s; white-space: nowrap;
+}
+[data-theme="dark"] .rm-pill {
+  background: #252525; border-color: rgba(255,255,255,0.1); color: #aaa;
+}
+.rm-pill.active {
+  background: var(--p1, #2bb673);
+  border-color: var(--p1, #2bb673);
+  color: #fff;
+}
+.rm-font-btn {
+  flex-shrink: 0;
+  width: 32px; height: 32px; border-radius: 10px;
+  border: 1.5px solid rgba(0,0,0,0.1);
+  background: #f4f4f4; color: #444;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: inherit;
+  display: flex; align-items: center; justify-content: center;
+}
+[data-theme="dark"] .rm-font-btn {
+  background: #252525; border-color: rgba(255,255,255,0.1); color: #aaa;
+}
+
+/* ── scroll body ── */
+.rm-body {
+  flex: 1; overflow-y: auto;
+  padding: 0 0 80px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Bismillah header ── */
+.rm-bismillah {
+  text-align: center;
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 28px; color: var(--p1, #2bb673);
+  padding: 28px 20px 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  margin-bottom: 4px;
+}
+[data-theme="dark"] .rm-bismillah { border-color: rgba(255,255,255,0.06); }
+
+/* ── each ayah row ── */
+.rm-ayah {
+  padding: 22px 20px 18px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background .2s;
+  cursor: default;
+}
+[data-theme="dark"] .rm-ayah { border-color: rgba(255,255,255,0.05); }
+.rm-ayah.rm-active {
+  background: rgba(43,182,115,0.07);
+  border-left: 3px solid var(--p1, #2bb673);
+}
+.rm-ayah:active { background: rgba(43,182,115,0.05); }
+
+/* number badge */
+.rm-ayah-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--p1, #2bb673); color: #fff;
+  font-size: 11px; font-weight: 700;
+  margin-bottom: 14px; flex-shrink: 0;
+}
+
+/* arabic block */
+.rm-arabic {
+  font-family: 'Noto Naskh Arabic', serif;
+  direction: rtl; text-align: right;
+  color: var(--text, #1a1a1a);
+  line-height: 2.1;
+  margin-bottom: 14px;
+}
+
+/* rumi block */
+.rm-rumi {
+  font-size: 13px; color: var(--textMuted, #999);
+  font-style: italic; line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* translation */
+.rm-trans {
+  font-size: 14px; color: var(--textSub, #555);
+  line-height: 1.7;
+}
+[data-theme="dark"] .rm-trans { color: #909090; }
+
+/* action row per ayah */
+.rm-ayah-actions {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 14px; padding-top: 10px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+[data-theme="dark"] .rm-ayah-actions { border-color: rgba(255,255,255,0.05); }
+.rm-ayah-action-btn {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 11px; border-radius: 20px;
+  border: 1.5px solid rgba(0,0,0,0.09);
+  background: none; color: var(--textSub,#666);
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  font-family: inherit; transition: all .15s;
+}
+[data-theme="dark"] .rm-ayah-action-btn {
+  border-color: rgba(255,255,255,0.09); color: #888;
+}
+.rm-ayah-action-btn:active { background: rgba(43,182,115,0.1); }
+.rm-ayah-action-btn.bm-active {
+  border-color: var(--p1,#2bb673);
+  color: var(--p1,#2bb673);
+  background: rgba(43,182,115,0.07);
+}
+
+/* progress bar at bottom */
+.rm-progress-bar-wrap {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: 3px; background: rgba(0,0,0,0.08); z-index: 11;
+}
+[data-theme="dark"] .rm-progress-bar-wrap { background: rgba(255,255,255,0.08); }
+.rm-progress-bar-fill {
+  height: 100%;
+  background: var(--p1, #2bb673);
+  transition: width .2s;
+}
+</style>
+
+<div id="sqReadingOverlay">
+  <!-- Top bar -->
+  <div class="rm-topbar">
+    <button class="rm-back-btn" onclick="sqReadingClose()" title="Back">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="rm-topbar-info">
+      <div class="rm-topbar-name" id="rmSurahName">Al-Fatihah</div>
+      <div class="rm-topbar-sub" id="rmSurahSub">7 verses · Meccan</div>
+    </div>
+    <div class="rm-topbar-arabic" id="rmSurahArabic">الفاتحة</div>
+  </div>
+
+  <!-- Settings / lang / font bar -->
+  <div class="rm-settings-bar">
+    <button class="rm-pill active" id="rmPillEn" onclick="rmSetLang('en')">English</button>
+    <button class="rm-pill" id="rmPillMs" onclick="rmSetLang('ms')">Melayu</button>
+    <button class="rm-pill" id="rmPillRumi" onclick="rmToggleRumi()">Rumi</button>
+    <div style="margin-left:auto;display:flex;gap:6px;flex-shrink:0;">
+      <button class="rm-font-btn" onclick="rmFontAdj(-1)" title="Smaller">A−</button>
+      <button class="rm-font-btn" onclick="rmFontAdj(1)" title="Larger">A+</button>
+    </div>
+  </div>
+
+  <!-- Scrollable ayah list -->
+  <div class="rm-body" id="rmBody"></div>
+
+  <!-- Reading progress bar -->
+  <div class="rm-progress-bar-wrap">
+    <div class="rm-progress-bar-fill" id="rmProgressFill" style="width:0%"></div>
+  </div>
+</div>
+
+<script>
+// ===== READING MODE =====
+let _rmActive  = false;
+let _rmSurah   = null;
+let _rmLang    = 'en';
+let _rmRumi    = false;
+let _rmFontSize = 26; // arabic base px
+
+function sqReadingOpen(){
+  const s = (typeof curSurah === 'function') ? curSurah() : null;
+  if(!s || !s.ayahs){
+    if(typeof showToast === 'function') showToast('Open a surah first', '#f59e0b');
+    return;
+  }
+  _rmSurah  = s;
+  _rmActive = true;
+  // Inherit lang from main player if available
+  if(typeof S !== 'undefined' && S.lang) _rmLang = S.lang;
+
+  document.getElementById('sqReadingOverlay').classList.add('rm-open');
+  _rmBuildPage();
+
+  // Scroll to active ayah after paint
+  requestAnimationFrame(()=>{
+    const activeIdx = (typeof S !== 'undefined') ? (S.activeAyahIdx || 0) : 0;
+    const el = document.getElementById(`rmAyah_${activeIdx}`);
+    if(el) el.scrollIntoView({ block: 'center' });
+  });
+
+  // Track scroll progress
+  const body = document.getElementById('rmBody');
+  body.addEventListener('scroll', _rmOnScroll, { passive: true });
+}
+
+function sqReadingClose(){
+  _rmActive = false;
+  document.getElementById('sqReadingOverlay').classList.remove('rm-open');
+  const body = document.getElementById('rmBody');
+  body.removeEventListener('scroll', _rmOnScroll);
+}
+
+function _rmOnScroll(){
+  const body = document.getElementById('rmBody');
+  const max  = body.scrollHeight - body.clientHeight;
+  const pct  = max > 0 ? (body.scrollTop / max) * 100 : 0;
+  document.getElementById('rmProgressFill').style.width = pct + '%';
+}
+
+function _rmBuildPage(){
+  if(!_rmSurah) return;
+  const s = _rmSurah;
+
+  // Header info
+  document.getElementById('rmSurahName').textContent   = s.name || '';
+  document.getElementById('rmSurahSub').textContent    = `${s.total || s.ayahs.length} verses · ${s.revelation || ''}`;
+  document.getElementById('rmSurahArabic').textContent = s.arabic || '';
+
+  // Lang pills
+  document.getElementById('rmPillEn').classList.toggle('active',   _rmLang === 'en');
+  document.getElementById('rmPillMs').classList.toggle('active',   _rmLang === 'ms');
+  document.getElementById('rmPillRumi').classList.toggle('active', _rmRumi);
+
+  const activeIdx = (typeof S !== 'undefined') ? (S.activeAyahIdx || 0) : 0;
+  const body = document.getElementById('rmBody');
+  body.innerHTML = '';
+
+  // Bismillah (not for At-Tawbah / surah 9, and surah 1 itself is bismillah)
+  if(s.id !== 9){
+    const bism = document.createElement('div');
+    bism.className = 'rm-bismillah';
+    bism.textContent = s.id === 1 ? '' : '﷽';
+    if(s.id !== 1) body.appendChild(bism);
+  }
+
+  // Build each ayah
+  s.ayahs.forEach((a, i) => {
+    const isActive = i === activeIdx;
+    const bmActive = (typeof isBM === 'function') ? isBM(s.id, a.n) : false;
+
+    const row = document.createElement('div');
+    row.className = 'rm-ayah' + (isActive ? ' rm-active' : '');
+    row.id = `rmAyah_${i}`;
+
+    row.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div class="rm-ayah-num">${a.n}</div>
+        <div style="flex:1;height:1px;background:rgba(0,0,0,0.05);"></div>
+      </div>
+      <div class="rm-arabic" style="font-size:${_rmFontSize}px;">${a.ar || ''}</div>
+      ${_rmRumi && a.rumi ? `<div class="rm-rumi">${a.rumi}</div>` : ''}
+      <div class="rm-trans">${a[_rmLang] || a.en || ''}</div>
+      <div class="rm-ayah-actions">
+        <button class="rm-ayah-action-btn${bmActive?' bm-active':''}" onclick="rmToggleBM(${i},this)" id="rmBmBtn_${i}">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="${bmActive?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          ${bmActive ? 'Saved' : 'Save'}
+        </button>
+        <button class="rm-ayah-action-btn" onclick="rmJumpPlay(${i})">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Play
+        </button>
+      </div>
+    `;
+    body.appendChild(row);
+  });
+}
+
+function rmSetLang(lang){
+  _rmLang = lang;
+  _rmBuildPage();
+}
+
+function rmToggleRumi(){
+  _rmRumi = !_rmRumi;
+  _rmBuildPage();
+}
+
+function rmFontAdj(delta){
+  _rmFontSize = Math.max(18, Math.min(42, _rmFontSize + delta * 2));
+  // Patch arabic elements without full rebuild
+  document.querySelectorAll('.rm-arabic').forEach(el => {
+    el.style.fontSize = _rmFontSize + 'px';
+  });
+}
+
+function rmToggleBM(idx, btn){
+  if(!_rmSurah) return;
+  const a = _rmSurah.ayahs[idx];
+  if(!a) return;
+  if(typeof toggleBM === 'function'){
+    // Mirror main toggleBM by directly manipulating S.bookmarks + saveBookmarks
+    const bmIdx = S.bookmarks.findIndex(b => b.surahId === _rmSurah.id && b.ayahN === a.n);
+    if(bmIdx >= 0){
+      S.bookmarks.splice(bmIdx, 1);
+    } else {
+      S.bookmarks.push({ surahId: _rmSurah.id, ayahN: a.n });
+    }
+    if(typeof saveBookmarks === 'function') saveBookmarks();
+  }
+  // Update button UI inline (no full rebuild)
+  const isNowBm = S.bookmarks.some(b => b.surahId === _rmSurah.id && b.ayahN === a.n);
+  const row = document.getElementById(`rmAyah_${idx}`);
+  if(row){
+    const b = row.querySelector('.rm-ayah-action-btn');
+    if(b){
+      b.classList.toggle('bm-active', isNowBm);
+      b.innerHTML = `
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="${isNowBm?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        ${isNowBm ? 'Saved' : 'Save'}
+      `;
+    }
+  }
+  // Sync main player bookmark button
+  if(typeof renderPlayer === 'function' && typeof S !== 'undefined' && S.activeAyahIdx === idx){
+    renderPlayer();
+  }
+}
+
+function rmJumpPlay(idx){
+  if(!_rmSurah) return;
+  if(typeof S !== 'undefined'){
+    const isSameAyah = (S.activeAyahIdx === idx);
+    if(isSameAyah && S.isPlaying){
+      // Pause
+      S.isPlaying = false;
+      if(typeof audio !== 'undefined') audio.pause();
+      if(typeof updatePlayBtn === 'function') updatePlayBtn();
+      if(typeof updateMini    === 'function') updateMini();
+      // Update this button to show play
+      const el = document.getElementById(`rmAyah_${idx}`);
+      if(el){
+        const pb = el.querySelector('.rm-ayah-action-btn:last-child');
+        if(pb) pb.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Play`;
+      }
+      return;
+    }
+    // Play this ayah
+    S.activeAyahIdx = idx;
+    S.currentRepeat = 0;
+    S.isPlaying = true;
+    if(typeof saveProgress === 'function') saveProgress(_rmSurah.id, idx);
+    if(typeof loadAudio    === 'function') loadAudio(true);
+    if(typeof renderPlayer === 'function') renderPlayer();
+    if(typeof updatePlayBtn=== 'function') updatePlayBtn();
+  }
+  // Update all play buttons - reset to Play, then set active to Pause
+  document.querySelectorAll('.rm-ayah').forEach((r, i) => {
+    r.classList.toggle('rm-active', i === idx);
+    const pb = r.querySelector('.rm-ayah-action-btn:last-child');
+    if(pb){
+      if(i === idx){
+        pb.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> Pause`;
+      } else {
+        pb.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Play`;
+      }
+    }
+  });
+  const el = document.getElementById(`rmAyah_${idx}`);
+  if(el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// Keep Reading Mode highlight in sync when audio moves to next ayah
+const _rmOrigRenderPlayer = window.renderPlayer;
+if(typeof _rmOrigRenderPlayer === 'function'){
+  window.renderPlayer = function(){
+    _rmOrigRenderPlayer.apply(this, arguments);
+    if(_rmActive && typeof S !== 'undefined'){
+      // Update active highlight without rebuilding
+      const idx = S.activeAyahIdx;
+      document.querySelectorAll('.rm-ayah').forEach((r,i) => {
+        r.classList.toggle('rm-active', i === idx);
+      });
+    }
+  };
+}
+// ===== END READING MODE =====
+</script>
+
   <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sahabat-quran/service-worker.js');
