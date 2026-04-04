@@ -7927,7 +7927,7 @@ window.sqOTPRequestCode = async function(){
   const btn = document.getElementById('sqOtpRequestBtn');
   if(btn){ btn.textContent = '⏳ Menghantar...'; btn.disabled = true; }
   try {
-    const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true, emailRedirectTo: null } });
+    const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true, emailRedirectTo: 'https://tertibteam.github.io/sahabat-quran/' } });
     if(error) throw error;
     _sbOtpSent = true;
     const ps = document.getElementById('sqAuthProviderScreen');
